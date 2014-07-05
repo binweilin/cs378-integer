@@ -1,0 +1,124 @@
+Running main() from gtest_main.cc
+[==========] Running 16 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 16 tests from Integer
+[ RUN      ] Integer.shift_left_digits
+TestInteger.c++:63: Failure
+Value of: p - x
+  Actual: 0
+Expected: 5
+[  FAILED  ] Integer.shift_left_digits (76 ms)
+[ RUN      ] Integer.shift_right_digits
+TestInteger.c++:75: Failure
+Value of: p - x
+  Actual: 0
+Expected: 1
+[  FAILED  ] Integer.shift_right_digits (7 ms)
+[ RUN      ] Integer.plus_digits
+TestInteger.c++:88: Failure
+Value of: p - x
+  Actual: 0
+Expected: 3
+[  FAILED  ] Integer.plus_digits (6 ms)
+[ RUN      ] Integer.minus_digits
+TestInteger.c++:101: Failure
+Value of: p - x
+  Actual: 0
+Expected: 3
+[  FAILED  ] Integer.minus_digits (6 ms)
+[ RUN      ] Integer.multiplies_digits
+TestInteger.c++:114: Failure
+Value of: p - x
+  Actual: 0
+Expected: 6
+[  FAILED  ] Integer.multiplies_digits (6 ms)
+[ RUN      ] Integer.divides_digits
+TestInteger.c++:127: Failure
+Value of: p - x
+  Actual: 0
+Expected: 3
+[  FAILED  ] Integer.divides_digits (6 ms)
+[ RUN      ] Integer.constructor_1
+TestInteger.c++:137: Failure
+Value of: false
+  Actual: false
+Expected: true
+[  FAILED  ] Integer.constructor_1 (9 ms)
+[ RUN      ] Integer.constructor_2
+[       OK ] Integer.constructor_2 (2 ms)
+[ RUN      ] Integer.constructor_3
+[       OK ] Integer.constructor_3 (3 ms)
+[ RUN      ] Integer.abs_1
+TestInteger.c++:161: Failure
+Value of: x
+  Actual: 0
+Expected: 98765
+[  FAILED  ] Integer.abs_1 (14 ms)
+[ RUN      ] Integer.abs_2
+TestInteger.c++:170: Failure
+Value of: x
+  Actual: 0
+Expected: -98765
+[  FAILED  ] Integer.abs_2 (6 ms)
+[ RUN      ] Integer.equal_to
+TestInteger.c++:183: Failure
+Value of: y
+  Actual: 0
+Expected: x
+Which is: 0
+[  FAILED  ] Integer.equal_to (9 ms)
+[ RUN      ] Integer.negation
+TestInteger.c++:197: Failure
+Value of: y
+  Actual: 0
+Expected: -98765
+[  FAILED  ] Integer.negation (5 ms)
+[ RUN      ] Integer.output
+TestInteger.c++:210: Failure
+Value of: out.str()
+  Actual: "0"
+Expected: "98765"
+[  FAILED  ] Integer.output (18 ms)
+[ RUN      ] Integer.pow_1
+TestInteger.c++:224: Failure
+Value of: x
+  Actual: 0
+Expected: 0
+[  FAILED  ] Integer.pow_1 (8 ms)
+[ RUN      ] Integer.pow_2
+TestInteger.c++:234: Failure
+Value of: x
+  Actual: 0
+Expected: 98765
+[  FAILED  ] Integer.pow_2 (6 ms)
+[----------] 16 tests from Integer (204 ms total)
+
+[----------] Global test environment tear-down
+[==========] 16 tests from 1 test case ran. (248 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 14 tests, listed below:
+[  FAILED  ] Integer.shift_left_digits
+[  FAILED  ] Integer.shift_right_digits
+[  FAILED  ] Integer.plus_digits
+[  FAILED  ] Integer.minus_digits
+[  FAILED  ] Integer.multiplies_digits
+[  FAILED  ] Integer.divides_digits
+[  FAILED  ] Integer.constructor_1
+[  FAILED  ] Integer.abs_1
+[  FAILED  ] Integer.abs_2
+[  FAILED  ] Integer.equal_to
+[  FAILED  ] Integer.negation
+[  FAILED  ] Integer.output
+[  FAILED  ] Integer.pow_1
+[  FAILED  ] Integer.pow_2
+
+14 FAILED TESTS
+
+
+
+File 'TestInteger.c++'
+Lines executed:71.70% of 106
+Branches executed:41.80% of 866
+Taken at least once:20.90% of 866
+Calls executed:39.18% of 753
+Creating 'TestInteger.c++.gcov'
