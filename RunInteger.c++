@@ -6,7 +6,7 @@
 
 /*
 To compile the program:
-    % g++-4.7 -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall Integer.c++ RunInteger.c++ -o RunInteger
+    % g++-4.7 -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall RunInteger.c++ -o RunInteger
 
 To run the program:
     % valgrind RunInteger < RunInteger.in

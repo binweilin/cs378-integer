@@ -16,7 +16,7 @@
 #include <stdexcept> // invalid_argument
 #include <string>    // string
 #include <vector>    // vector
-
+using namespace std;
 // -----------------
 // shift_left_digits
 // -----------------
@@ -33,7 +33,11 @@
 template <typename II, typename FI>
 FI shift_left_digits (II b, II e, int n, FI x) {
     // <your code>
-    return x;}
+    x = copy(b, e, x);
+    FI y = x;
+    advance(y, n);
+    fill(x, y, typename iterator_traits<II>::value_type());
+    return y;}
 
 // ------------------
 // shift_right_digits
@@ -51,6 +55,16 @@ FI shift_left_digits (II b, II e, int n, FI x) {
 template <typename II, typename FI>
 FI shift_right_digits (II b, II e, int n, FI x) {
     // <your code>
+    while(n){
+        e--;
+        n--;
+    }
+
+    while(b != e){
+        *x = *b;
+        x++;
+        b++;
+    }
     return x;}
 
 // -----------
@@ -71,6 +85,68 @@ FI shift_right_digits (II b, II e, int n, FI x) {
 template <typename II1, typename II2, typename FI>
 FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
     // <your code>
+    int carry = 0;
+    int l = 0;
+    int max = 0;
+    if(e1-b1 > e2-b2){
+        l = e2-b2;
+        max = 1;
+    }
+    else if(e1-b1 < e2-b2){
+        l = e1-b1;
+        max = 2;
+    }
+    else{
+        l = e1-b1;
+        max = 3;
+    }
+
+    while(l--){
+        int value = *b1 + *b2 + carry;
+        if(value > 10){
+            value -= 10;
+            *x = value;
+            carry = 1;
+        }
+        else{
+            *x = value;
+            carry = 0;
+        }
+        b1++;
+        b2++;
+        x++;
+    }
+    if(max == 3){
+        if(carry == 1){           
+            *x = 1;
+            carry = 0;
+        }
+        x++;
+    }
+    else if(max == 1){
+        while(b1 != e1){ 
+            if(carry == 1){
+                *x = *b1 + 1;
+                carry = 0;
+            }
+            else
+                *x = *b1;
+            x++;
+            b1++;
+        }
+    }
+    else{
+        while(b2 != e2){
+            if(carry == 1){
+                *x = *b2 + 1;
+                carry = 0;
+            }
+            else
+                *x = *b2;
+            x++;
+            b2++;
+        }
+    }    
     return x;}
 
 // ------------
@@ -91,11 +167,99 @@ FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
 template <typename II1, typename II2, typename FI>
 FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
     // <your code>
-    return x;}
+    bool borrow = false;
+    int l = 0;
+    int max = 0;
+    if(e1-b1 > e2-b2){
+        l = e2-b2;
+        max = 1;
+    }
+    else{
+        l = e1-b1;
+        max = 2;
+    }
+
+    while(l--){
+        int c = *b1;
+        if(borrow){
+            if(c == 0)
+                c = 9;
+            else{
+                c--;
+                borrow = false;
+            }
+        }
+        if(c < *b2){
+            *x = c + 10 - *b2;
+            borrow = true;
+        }
+        else
+            *x = c - *b2;
+        b1++;
+        b2++;
+        x++;
+    }
+    
+    if(max == 1){
+        if(borrow){
+            *x = *b1--;
+            x++;
+            b1++;
+            borrow = false; 
+        }
+        while(b1 != e1){
+            *x = *b1;
+            x++;
+            b1++;
+        }
+    }
+    else{
+        if(borrow){
+            *x = *b2--;
+            x++;
+            b2++;
+            borrow = false; 
+        }
+        while(b2 != e2){
+            *x = *b2;
+            x++;
+            b2++;
+        }
+    }
+
+    while(*(x-1) == 0)
+        x--;
+
+    return x;
+}
 
 // -----------------
 // multiplies_digits
 // -----------------
+
+template <typename II1, typename II2, typename FI>
+FI multiple_helper(II1 b1, II2 b2, II2 e2, FI x){
+    int carry = 0;
+    while(b2 != e2){
+        int value = *b1 * *b2 + carry;
+        if(value > 10){
+            *x = value%10;
+            carry = value/10;
+        }
+        else{
+            *x = value;
+            carry = 0;
+        }
+        b2++;
+        x++;
+    }
+    if(carry != 0){
+        x++;
+        *x = carry;
+    }
+
+    return x;
+}
 
 /**
  * @param b  an iterator to the beginning of an input  sequence (inclusive)
@@ -111,7 +275,29 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
 template <typename II1, typename II2, typename FI>
 FI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
     // <your code>
-    return x;}
+    if(b1+1 == e1 && *b1 == 0){
+        *x = 0;
+        x++;
+        return x;
+    }
+    if(b2+1 == e2 && *b2 == 0){
+        *x = 0;
+        x++;
+        return x;
+    }
+
+    FI begin = x;
+    int* y;
+    x = multiple_helper(b1, b2, e2, y);
+    b1++;
+    b2++;
+    for(; b1 != e1; b1++){             
+        FI end = multiple_helper(b1, b2, e2, y);
+        x = plus_digits(begin, x, y, end, x);
+    }
+
+    return x;
+}
 
 // --------------
 // divides_digits
@@ -313,7 +499,8 @@ class Integer {
         // ----
         // data
         // ----
-
+        int number;
+        bool negative;
         C _x; // the backing container
         // <your data>
 

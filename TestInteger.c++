@@ -82,10 +82,10 @@ TEST(Integer, shift_right_digits) {
 TEST(Integer, plus_digits) {
     const int a[] = {2, 3, 4};
     const int b[] = {5, 6, 7};
-    const int c[] = {8, 0, 1};
+    const int c[] = {7, 9, 1, 1};
           int x[10];
     const int* p = plus_digits(a, a + 3, b, b + 3, x);
-    ASSERT_EQ(3, p - x);
+    ASSERT_EQ(4, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
 // ------------
@@ -95,9 +95,9 @@ TEST(Integer, plus_digits) {
 TEST(Integer, minus_digits) {
     const int a[] = {8, 0, 1};
     const int b[] = {5, 6, 7};
-    const int c[] = {2, 3, 4};
+    const int c[] = {7, 5, 6};
           int x[10];
-    const int* p = minus_digits(a, a + 3, b, b + 3, x);
+    const int* p = minus_digits(b, b + 3, a, a + 3, x);
     ASSERT_EQ(3, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
@@ -108,9 +108,12 @@ TEST(Integer, minus_digits) {
 TEST(Integer, multiplies_digits) {
     const int a[] = {2, 3, 4};
     const int b[] = {5, 6, 7};
-    const int c[] = {1, 3, 2, 6, 7, 8};
+    const int c[] = {0, 8, 4, 0, 3, 3};
           int x[10];
     const int* p = multiplies_digits(a, a + 3, b, b + 3, x);
+    for(int i = 0; i < 6; i++){
+        cout << *(p+i)<<endl;
+    }
     ASSERT_EQ(6, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
