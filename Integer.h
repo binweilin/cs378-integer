@@ -263,30 +263,6 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
 // multiplies_digits
 // -----------------
 
-// template <typename II1, typename II2, typename FI>
-// FI multiple_helper(II1 b1, II2 b2, II2 e2, FI x){
-//     int carry = 0;
-//     while(b2 != e2){
-//         int value = *b1 * *b2 + carry;
-//         if(value > 10){
-//             *x = value%10;
-//             carry = value/10;
-//         }
-//         else{
-//             *x = value;
-//             carry = 0;
-//         }
-//         b2++;
-//         x++;
-//     }
-//     if(carry != 0){
-//         x++;
-//         *x = carry;
-//     }
-
-//     return x;
-// }
-
 /**
  * @param b  an iterator to the beginning of an input  sequence (inclusive)
  * @param e  an iterator to the end       of an input  sequence (exclusive)
@@ -390,14 +366,10 @@ int greater_than(vector<int> t1, vector<int> t2){
     if(t1.size() < t2.size())
         return -1;
     if(t1.size() == t2.size()){
-        if(t1[0] < t2[0]) 
-            return -1;
-        // int count = 0;
-        // for(unsigned int i = 0; i < t1.size(); i++){
-        //     if(t1[i] == t2[i])
-        //         count++;
-        // }
-        // if(count )
+        for(unsigned int i = 0; i < t1.size(); i++){
+            if(t1[i] < t2[i])
+                return -1;
+        }
         if(equal(t1.begin(), t1.begin() + t1.size(), t2.begin()))
             return 0;
     }

@@ -340,6 +340,14 @@ class Integer {
      */
     friend bool operator == (const Integer& lhs, const Integer& rhs) {
         // <your code>
+        if(lhs.is_negative == rhs.is_negative  &&
+            lhs._x.size() == rhs._x.size()){
+            for(unsigned int i = 0; i < lhs._x.size(); i++){
+                if(!(lhs._x[i] == rhs._x[i]))
+                    return false;
+            }
+            return true;
+        }
         return false;}
 
     // -----------
@@ -361,6 +369,35 @@ class Integer {
      */
     friend bool operator < (const Integer& lhs, const Integer& rhs) {
         // <your code>
+        if(lhs->is_negative != rhs->is_negative){
+            if(lhs->is_negative == true)
+                return true;
+        }
+        else if(lhs->is_negative == false){
+            if(lhs->_x.size() < rhs->_x.size())
+                return true;
+            else if(lhs->_x.size() == rhs->_x.size()){
+                unsigned int s = lhs->_x.size()-1;
+                while(s >= 0){
+                    if(lhs->_x[s] > rhs->_x[s])
+                        return false;
+                }
+                return true;
+            }
+        }
+        else{
+            if(lhs->_x.size() > rhs->_x.size())
+                return true;
+            else if(lhs->_x.size() == rhs->_x.size()){
+                unsigned int s = lhs->_x.size()-1;
+                while(s >= 0){
+                    if(lhs->_x[s] < rhs->_x[s])
+                        return false;
+                }
+                return true;
+            }
+        }
+
         return false;}
 
     // -----------
@@ -476,7 +513,12 @@ class Integer {
      */
     friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) {
         // <your code>
-        return lhs << "0";}
+        if(rhs.is_negative == true)
+            lhs << '-';
+        for(unsigned int i = rhs._x.size()-1; i >= 0; i++){
+            lhs << rhs._x[i];
+        }
+        return lhs;}
 
     // ---
     // abs
@@ -515,8 +557,13 @@ class Integer {
         // valid
         // -----
 
-        bool valid () const { // class invariant
-            return 1;}//all_of(this->_x.begin(), this->_x.end(), ::isdigit);}
+        bool valid () const { // class invariant 
+            for(unsigned int i = 0; i < _x.size(); i++){
+                if(!isdigit(_x[i]))
+                    return false;
+            }
+
+            return true;}//all_of(this->_x.begin(), this->_x.end(), ::isdigit);}
 
     public:
         // ------------
@@ -526,15 +573,14 @@ class Integer {
         /**
          * <your documentation>
          */
-        Integer (int value) {
-            
+        Integer (int value) {           
             if(value < 0)
                 this->is_negative = true;
             value = ::abs(value);
             do {
                 int to_insert = value % 10;
                 value /= 10;
-                typename C::iterator it = this->_x.begin();
+                typename C::iterator it = this->_x.end();
                 this->_x.insert(it,to_insert);
                 cout << *this->_x.begin() << endl;
             } while(value != 0);
@@ -546,8 +592,18 @@ class Integer {
          */
         explicit Integer (const std::string& value) {
             // <your code>
+            unsigned int i = 0;
+            if(value[0] == '-'){
+                this->is_negative = true;
+                i++;
+            }
+            while(i < value.size()){
+                this->_x.insert(this->_x.begin(), value[i]);
+                i++;
+            }
+
             if (!valid())
-                throw std::invalid_argument("Integer::Integer()");}
+                throw std::invalid_argument("Integer()");}
 
         // Default copy, destructor, and copy assignment.
         // Integer (const Integer&);
@@ -562,8 +618,9 @@ class Integer {
          * <your documentation>
          */
         Integer operator - () const {
-            // <your code>
-            return Integer(0);}
+            Integer x = *this;
+            x.is_negative = !(x.is_negative);
+            return x;}
 
         // -----------
         // operator ++
@@ -612,6 +669,32 @@ class Integer {
          */
         Integer& operator += (const Integer& rhs) {
             // <your code>
+            bool flag;
+            Integer l = *this;
+            Integer result;
+            typename C::iterator b1 = l._x.begin();
+            typename C::iterator e1 = l._x.end();
+            typename C::iterator b2 = rhs._x.begin();
+            typename C::iterator e2 = rhs._x.end();
+            typename C::iterator x = result._x.begin();
+            if(rhs.is_negative == this.is_negative)
+                flag = true;
+            else
+                flag = false;
+
+            if(flag == true){
+                plus_digits(b1,e1,b2,e2,x);
+                result.is_negative = rhs.is_negative;
+            }
+            else{
+                minus_digits(b1,e1,b2,e2,x);
+                if(l > rhs)
+                    result.is_negative = l.is_negative;
+                else
+                    result.is_negative = rhs.is_negative;
+            }
+            *this = result;
+
             return *this;}
 
         // -----------
@@ -623,6 +706,35 @@ class Integer {
          */
         Integer& operator -= (const Integer& rhs) {
             // <your code>
+            bool flag;
+            Integer l = *this;
+            Integer result;
+            typename C::iterator b1 = l._x.begin();
+            typename C::iterator e1 = l._x.end();
+            typename C::iterator b2 = rhs._x.begin();
+            typename C::iterator e2 = rhs._x.end();
+            typename C::iterator x = result._x.begin();
+            if(rhs.is_negative == this.is_negative)
+                flag = false;
+            else
+                flag = true;
+
+            if(flag == true){
+                plus_digits(b1,e1,b2,e2,x);
+                result.is_negative = l.is_negative;
+            }
+            else{
+                minus_digits(b1,e1,b2,e2,x);
+                if(l > rhs && l.is_negative == false)
+                    result.is_negative = false;
+                else if(l < rhs && l.is_negative == false)
+                    result.is_negative = true;
+                else if(l < rhs && l.is_negative == true)
+                    result.is_negative = false;
+                else if(l < rhs && l.is_negative == true)
+                    result.is_negative = true;
+            }
+            *this = result;
             return *this;}
 
         // -----------
@@ -634,13 +746,22 @@ class Integer {
          */
         Integer& operator *= (const Integer& rhs) {
             // <your code>
-            if((this->is_negative == false && rhs->is_negative == false) || 
-                (this->is_negative == true && rhs->is_negative == true))
+            if(this->is_negative ==  rhs->is_negative)
                 this->is_negative = false;
             else
                 this->is_negative = true;
 
-            // still shit to do
+            Integer l = *this;
+            Integer result;
+            typename C::iterator b1 = l._x.begin();
+            typename C::iterator e1 = l._x.end();
+            typename C::iterator b2 = rhs._x.begin();
+            typename C::iterator e2 = rhs._x.end();
+            typename C::iterator x = result._x.begin();
+
+            multiplies_digits(b1,e1,b2,e1,x);
+            *this = result;
+
             return *this;}
 
         // -----------
@@ -653,6 +774,20 @@ class Integer {
          */
         Integer& operator /= (const Integer& rhs) {
             // <your code>
+            if(this->is_negative ==  rhs->is_negative)
+                this->is_negative = false;
+            else
+                this->is_negative = true;
+
+            Integer l = *this;
+            Integer result;
+            typename C::iterator b1 = l._x.begin();
+            typename C::iterator e1 = l._x.end();
+            typename C::iterator b2 = rhs._x.begin();
+            typename C::iterator e2 = rhs._x.end();
+            typename C::iterator x = result._x.begin();
+
+            divide_digits(b1,e1,b2,e1,x);
             return *this;}
 
         // -----------
@@ -665,6 +800,7 @@ class Integer {
          */
         Integer& operator %= (const Integer& rhs) {
             // <your code>
+
             return *this;}
 
         // ------------
@@ -676,6 +812,9 @@ class Integer {
          */
         Integer& operator <<= (int n) {
             // <your code>
+            typename C::iterator b = this._x.begin();
+            typename C::iterator e = this._x.end();
+            shift_left_digits(b, e, n);
             return *this;}
 
         // ------------
@@ -687,6 +826,9 @@ class Integer {
          */
         Integer& operator >>= (int n) {
             // <your code>
+            typename C::iterator b = this._x.begin();
+            typename C::iterator e = this._x.end();
+            shift_right_digits(b, e, n);
             return *this;}
 
         // ---
@@ -699,6 +841,7 @@ class Integer {
          */
         Integer& abs () {
             // <your code>
+            *this.is_negative = false;
             return *this;}
 
         // ---

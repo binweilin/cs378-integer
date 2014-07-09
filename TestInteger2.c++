@@ -45,7 +45,7 @@ To obtain coverage of the test:
 
 #include "gtest/gtest.h"
 
-#include "Integer.h"
+#include "Integer2.h"
 
 // -----------
 // TestInteger
