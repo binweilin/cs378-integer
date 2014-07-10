@@ -142,12 +142,13 @@ TEST(Integer, minus_digitsV) {
 // -----------------
 
 TEST(Integer, multiplies_digits) {
-    const int a[] = {2, 3, 4};
-    const int b[] = {5, 6, 7};
-    const int c[] = {0, 8, 4, 0, 3, 3};
+    const int a[] = {4, 3, 2, 2, 2, 2};
+    const int b[] = {7, 6, 5, 1, 1, 1};
+    const int c[] = {8, 7, 6, 0, 8, 9, 3, 9, 7, 4, 2};
           int x[10];
-    const int* p = multiplies_digits(a, a + 3, b, b + 3, x);
-    ASSERT_EQ(6, p - x);
+    const int* p = multiplies_digits(a, a + 6, b, b + 6, x);
+    ASSERT_EQ(11, p - x);
+    cout << *(p-1) << *(p-2) << *(p-3) << *(p-4) << *(p-5) << *(p-6);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
 // --------------
@@ -158,6 +159,7 @@ TEST(Integer, divides_digits) {
     const int a[] = {0, 8, 4, 0, 3, 3};
     const int b[] = {5, 6, 7};
     const int c[] = {2, 3, 4};
+
           int x[10];
     const int* p = divides_digits(a, a + 6, b, b + 3, x);
     //cout<<*p<<endl<<*(p-1)<<endl<<*(p-2)<<endl;

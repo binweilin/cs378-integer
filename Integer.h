@@ -287,87 +287,40 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
  */
 template <typename II1, typename II2, typename FI>
 FI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
-    // <your code>
-    if(b1+1 == e1 && *b1 == 0){
-        *x = 0;
-        x++;
-        return x;
-    }
-    if(b2+1 == e2 && *b2 == 0){
-        *x = 0;
-        x++;
-        return x;
-    }
-
-    vector<int> result;
-    
-    int i = 0;
-    II2 begin = b2;  
-    while(b1 != e1){
-        b2 = begin;
-        int carry = 0;
-        vector<int> temp;
-        for(int j = i; j > 0; j--)
-                temp.push_back(0);
-       
-        while(b2 != e2){
-            int value = *b1 * *b2 + carry;
-            if(value >= 10){
-                temp.push_back(value%10);
-                carry = value/10;
-            }
-            else{
-                temp.push_back(value);
-                carry = 0;
-            }           
-            b2++;
-        }
-        if(carry != 0){
-            temp.push_back(carry);
-            carry = 0;
-        }
+    FI xb = x;
+    II2 b2c = b2;
+    int count1 = 0;
+    while(e1 > b1){
         
-        int c = 0;
-        for(unsigned int k = 0; k < result.size(); k++){           
-            int value = result[k] + temp[k] + c;
-            if(value >= 10){
-                result[k] = value%10;
-                c = value/10;
-            }
-            else{
-                result[k] = value;
-                c = 0;
-            }
+        int count2 = 0;
+        b2 = b2c;
+        while(e2 > b2){
+            
+            if(count1 == 0 || e2-1 == b2)
+                *(xb + count1 + count2) = *b1 * *b2;
+            else
+                *(xb + count1 + count2) += *b1 * *b2;
+            cout << "placing " << *(xb + count1 + count2) <<" in [" << count1+count2 << "]\n";
+            ++count2; ++b2;
         }
-        if(c != 0){
-            result.push_back(c);
-        }
-
-        for(unsigned int l = result.size(); l < temp.size(); l++){
-            result.push_back(temp[l]);
-        }
-        i++;
-        b1++;
+        x = xb + count1 + count2;
+        ++count1; ++b1;
     }
 
-    for(unsigned int m = 0; m < result.size(); m++){
-
-        *x = result[m];
-        x++;
+    int i = 0;
+    while((xb + i) != x){
+        if( *(xb + i) >= 10){
+            if((xb + i + 1) == x){
+                *(xb + i + 1) = *(xb+i) / 10;
+                ++x;
+            } else
+                *(xb + i + 1) += *(xb + i) / 10;
+            *(xb + i) %= 10;
+        }
+        ++i;
     }
 
-    // FI begin = x;
-    // int* y;
-    // x = multiple_helper(b1, b2, e2, y);
-    // b1++;
-    // b2++;
-    // for(; b1 != e1; b1++){             
-    //     FI end = multiple_helper(b1, b2, e2, y);
-    //     x = plus_digits(begin, x, y, end, x);
-    // }
-
-    return x;
-}
+    return x;}
 
 // --------------
 // divides_digits

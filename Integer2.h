@@ -283,6 +283,7 @@ OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
     			*(xb + count1 + count2) = *e1 * *e2;
 			else
     			*(xb + count1 + count2) += *e1 * *e2;
+            cout << "placing " << *(xb + count1 + count2) <<" in [" << count1+count2 << "]\n";
     		++count2;
     	}
     	x = xb + count1 + count2;
@@ -841,7 +842,7 @@ class Integer {
          */
         Integer& abs () {
             // <your code>
-            *this.is_negative = false;
+            //*this.is_negative = false;
             return *this;}
 
         // ---
