@@ -166,84 +166,109 @@ FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
  */
 template <typename II1, typename II2, typename FI>
 FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
-    // <your code>
-    bool borrow = false;
-    int l = 0;
-    int max = 0;
-    // II1 s1;
-    // II1 f1;
-    // II2 s2;
-    // II2 f2;
-    if(e1-b1 > e2-b2){
-        l = e2-b2;
-        max = 1;
-        // s1 = b1;
-        // f1 = e1;
-        // s2 = b2;
-        // f2 = e2;
-    }
-    else {
-        // s1 = b2;
-        // f1 = e2;
-        // s2 = b1;
-        // f2 = e2;
-        l = e1-b1;
-        max = 2;
-    }
+    
+    FI xb = x;
+    
+    // get max to determine subtacter and subtract-ee
+    bool b1_is_max = true;
+    II1 a = e1;
+    II2 b = e2;
+    if((e1 - b1) > (e2 - b2))
+        b1_is_max = true;
+    else if((e1-b1) < (e2-b2))
+        b1_is_max = false;
+    else{
+        b1_is_max = true;
+        // if same length find first difference and return max
+        while(a > b1){
+             --a; --b;
+            if(*a > *b){
 
-    while(l--){
-        int c = *b1;
-        if(borrow){
-            if(c == 0)
-                c = 9;
-            else{
-                c--;
-                borrow = false;
+                break;
+            }
+            else if(*a < *b){
+                b1_is_max = false;
+                break;
             }
         }
-        if(c < *b2){
-            *x = c + 10 - *b2;
-            borrow = true;
-        }
-        else
-            *x = c - *b2;
-        b1++;
-        b2++;
-        x++;
     }
     
-    if(max == 1){
-        if(borrow){
-            *x = *b1--;
-            x++;
-            b1++;
-            borrow = false; 
+    if(b1_is_max){
+    
+        // go through the iterators backwards and place answer in x
+        while(b1 != e1 && b2 != e2){
+            
+            // if the current place value of the max is less than the min
+            if(*b1 < *b2){
+                // distribute value from higher digits
+                *x = (10 + *b1) - *b2;
+                ++b1; ++b2; ++x;
+            
+                while(*b1 == 0){
+                    
+                    *x = 9 - *b2;
+                    ++b1; ++b2; ++x;
+                }
+                
+                if(b2 < e2)
+                    *x = *b1 - *b2 - 1;
+                else
+                    *x = *b1 -1;
+                ++x;
+            } else {
+                *x = *b1 - *b2;
+                ++x;
+            }
+            ++b1; ++b2;
         }
-        while(b1 != e1){
-            *x = *b1;
-            x++;
-            b1++;
+    
+        while(e1 != b1){
+            *x = *e1;
+            ++b1;
+            if(e1 != b1)
+                ++x;
+        }
+    } else {
+
+        // go through the iterators backwards and place answer in x
+        while(b2 != e2 && b1 != e1){
+            
+            // if the current place value of the max is less than the min
+            if(*b2 < *b1){
+                // distribute value from higher digits
+                *x = (10 + *b2) - *b1;
+                ++b2; ++b1; ++x;
+            
+                while(*b2 == 0){
+                    
+                    *x = 9 - *b1;
+                    ++b2; ++b1; ++x;
+                }
+                
+                if(b1 < e1)
+                    *x = *b2 - *b1 - 1;
+                else
+                    *x = *b2 -1;
+                ++x;
+            } else {
+                *x = *b2 - *b1;
+                ++x;
+            }
+            ++b2; ++b1;
+        }
+    
+        while(e2 != b2){
+            *x = *e2;
+            ++b2;
+            if(e2 != b2)
+                ++x;
         }
     }
-    else{
-        if(borrow){
-            *x = *b2--;
-            x++;
-            b2++;
-            borrow = false; 
-        }
-        while(b2 != e2){
-            *x = *b2;
-            x++;
-            b2++;
-        }
-    }
-
-    while(*(x-1) == 0)
-        x--;
-
-    return x;
-}
+    
+    // get rid of leading zeros
+    while(xb != (x-1) && *(x-1) == 0)
+        --x; 
+    return x;}
 
 // -----------------
 // multiplies_digits

@@ -93,11 +93,47 @@ TEST(Integer, plus_digits) {
 // ------------
 
 TEST(Integer, minus_digits) {
-    const int a[] = {8, 0, 1};
-    const int b[] = {5, 6, 7};
-    const int c[] = {7, 5, 6};
+    const int a[] = {7, 6, 5};
+    const int b[] = {1, 0, 8};
+    const int c[] = {4, 3, 2};
           int x[10];
     const int* p = minus_digits(b, b + 3, a, a + 3, x);
+    ASSERT_EQ(3, p - x);
+    ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
+
+TEST(Integer, minus_digitsII) {
+    const int a[] = {1, 0, 8};
+    const int b[] = {7, 6, 5};
+    const int c[] = {4, 3, 2};
+          int x[10];
+    const int* p = minus_digits(a, a + 3, b, b + 3, x);
+    ASSERT_EQ(3, p - x);
+    ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
+    
+TEST(Integer, minus_digitsIII) {
+    const int a[] = {7, 1, 5};
+    const int b[] = {1, 2};
+    const int c[] = {6, 9, 4};
+          int x[10];
+    const int* p = minus_digits(a, a + 3, b, b + 2, x);
+    ASSERT_EQ(3, p - x);
+    ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
+    
+TEST(Integer, minus_digitsIV) {
+    const int a[] = {7, 6, 5};
+    const int b[] = {0, 6, 5};
+    const int c[] = {7};
+          int x[10];
+    const int* p = minus_digits(a, a + 3, b, b + 3, x);
+    ASSERT_EQ(1, p - x);
+    ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
+
+TEST(Integer, minus_digitsV) {
+    const int a[] = {7, 1, 5, 1};
+    const int b[] = {1, 2};
+    const int c[] = {6, 9, 4, 1};
+          int x[10];
+    const int* p = minus_digits(a, a + 3, b, b + 2, x);
     ASSERT_EQ(3, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
