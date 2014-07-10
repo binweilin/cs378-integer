@@ -124,7 +124,7 @@ TEST(Integer, divides_digits) {
     const int c[] = {2, 3, 4};
           int x[10];
     const int* p = divides_digits(a, a + 6, b, b + 3, x);
-    //cout<<*p<<endl<<*(p-1)<<endl<<*(p-2)<<endl;
+    cout<<*p<<endl<<*(p-1)<<endl<<*(p-2)<<endl;
     ASSERT_EQ(3, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
