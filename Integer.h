@@ -190,20 +190,6 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
         l = e1-b1;
         max = 2;
     }
-    // else{
-    //     if(*(e1-1) > *(e2-1)){
-    //         s1 = b1;
-    //         f1 = e1;
-    //         s2 = b2;
-    //         f2 = e2;
-    //     }
-    //     else{
-    //         s1 = b2;
-    //         f1 = e2;
-    //         s2 = b1;
-    //         f2 = e2;
-    //     }
-    // }
 
     while(l--){
         int c = *b1;
@@ -367,8 +353,15 @@ int greater_than(vector<int> t1, vector<int> t2){
         return -1;
     if(t1.size() == t2.size()){
         for(unsigned int i = 0; i < t1.size(); i++){
-            if(t1[i] < t2[i])
+            // cout<<"t1: "<< t1[i]<<endl;
+            // cout<<"t2: "<<t2[i]<<endl;
+
+            if(t1[i] < t2[i]){
                 return -1;
+            }
+            else if(t1[i] > t2[i]){
+                break;
+            }
         }
         if(equal(t1.begin(), t1.begin() + t1.size(), t2.begin()))
             return 0;
@@ -429,9 +422,15 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             if(!first &&counter == 2){
                 result.push_back(0);
                 counter = 0;
+                cout<<"push 0"<<endl;
             }            
         }
         first = false;
+
+        cout<<"temp: "<<endl;
+        for(unsigned int i = 0; i< temp.size(); i++){
+            cout<<temp[i];
+        }cout<<endl;
 
         int count = 0;
         while(greater_than(temp, v2) == 1){
@@ -469,12 +468,20 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             temp.clear();
             temp = sub;
 
+            cout<<"sub: "<<endl;
+            for(unsigned int i = 0; i< sub.size(); i++){
+                cout<<sub[i];
+            }cout<<endl;
+
+            cout<<"greater_than:   "<<greater_than(temp, v2)<<endl;
+
             if(greater_than(temp, v2) == 0){
                 count++;
                 break;
-            }
+            }cout<<endl;
         }
         result.push_back(count);
+        cout<<"push " << count<<endl;
     }
     for(int s = result.size()-1; s >= 0; s--){
         *x = result[s];
@@ -740,7 +747,7 @@ class Integer {
                 //this->_x.insert(this->_x.begin(),to_insert);
                 // typename C::iterator it = this->_x.begin();
                 this->_x.push_back(to_insert);
-                cout << *this->_x.begin() << endl;
+                //cout << *this->_x.begin() << endl;
             } while(value != 0);
             }//assert(valid());}
 

@@ -124,7 +124,7 @@ TEST(Integer, divides_digits) {
     const int c[] = {2, 3, 4};
           int x[10];
     const int* p = divides_digits(a, a + 6, b, b + 3, x);
-    cout<<*p<<endl<<*(p-1)<<endl<<*(p-2)<<endl;
+    //cout<<*p<<endl<<*(p-1)<<endl<<*(p-2)<<endl;
     ASSERT_EQ(3, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
@@ -203,37 +203,37 @@ TEST(Integer, negation) {
 // output
 // ------
 
-TEST(Integer, output) {
-    try {
-        const Integer<int> x = 98765;
-        std::ostringstream out;
-        out << x;
-        ASSERT_EQ("98765", out.str());}
-    catch (std::invalid_argument& e) {
-        ASSERT_TRUE(false);}}
+// TEST(Integer, output) {
+//     try {
+//         const Integer<int> x = 98765;
+//         std::ostringstream out;
+//         out << x;
+//         ASSERT_EQ("98765", out.str());}
+//     catch (std::invalid_argument& e) {
+//         ASSERT_TRUE(false);}}
 
-// ---
-// pow
-// ---
+// // ---
+// // pow
+// // ---
 
-TEST(Integer, pow_1) {
-    try {
-        Integer<int>       x = 98765;
-        const int          e =  9867;
-        Integer<int>&      y = x.pow(e);
-        ASSERT_EQ(9867,  e);
-        ASSERT_EQ(   0,  x);
-        ASSERT_EQ(  &x, &y);}
-    catch (std::invalid_argument& e) {
-        ASSERT_TRUE(false);}}
+// TEST(Integer, pow_1) {
+//     try {
+//         Integer<int>       x = 98765;
+//         const int          e =  9867;
+//         Integer<int>&      y = x.pow(e);
+//         ASSERT_EQ(9867,  e);
+//         ASSERT_EQ(   0,  x);
+//         ASSERT_EQ(  &x, &y);}
+//     catch (std::invalid_argument& e) {
+//         ASSERT_TRUE(false);}}
 
-TEST(Integer, pow_2) {
-    try {
-        const Integer<int> x = 98765;
-        const int          e =  9867;
-        const Integer<int> y = pow(x, e);
-        ASSERT_EQ(98765, x);
-        ASSERT_EQ( 9867, e);
-        ASSERT_EQ(    0, y);}
-    catch (std::invalid_argument& e) {
-        ASSERT_TRUE(false);}}
+// TEST(Integer, pow_2) {
+//     try {
+//         const Integer<int> x = 98765;
+//         const int          e =  9867;
+//         const Integer<int> y = pow(x, e);
+//         ASSERT_EQ(98765, x);
+//         ASSERT_EQ( 9867, e);
+//         ASSERT_EQ(    0, y);}
+//     catch (std::invalid_argument& e) {
+//         ASSERT_TRUE(false);}}
