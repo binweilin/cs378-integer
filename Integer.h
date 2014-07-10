@@ -422,15 +422,15 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             if(!first &&counter == 2){
                 result.push_back(0);
                 counter = 0;
-                cout<<"push 0"<<endl;
+                //cout<<"push 0"<<endl;
             }            
         }
         first = false;
 
-        cout<<"temp: "<<endl;
-        for(unsigned int i = 0; i< temp.size(); i++){
-            cout<<temp[i];
-        }cout<<endl;
+        // cout<<"temp: "<<endl;
+        // for(unsigned int i = 0; i< temp.size(); i++){
+        //     cout<<temp[i];
+        // }cout<<endl;
 
         int count = 0;
         while(greater_than(temp, v2) == 1){
@@ -468,20 +468,20 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             temp.clear();
             temp = sub;
 
-            cout<<"sub: "<<endl;
-            for(unsigned int i = 0; i< sub.size(); i++){
-                cout<<sub[i];
-            }cout<<endl;
+            // cout<<"sub: "<<endl;
+            // for(unsigned int i = 0; i< sub.size(); i++){
+            //     cout<<sub[i];
+            // }cout<<endl;
 
-            cout<<"greater_than:   "<<greater_than(temp, v2)<<endl;
+            //cout<<"greater_than:   "<<greater_than(temp, v2)<<endl;
 
             if(greater_than(temp, v2) == 0){
                 count++;
                 break;
-            }cout<<endl;
+            }//cout<<endl;
         }
         result.push_back(count);
-        cout<<"push " << count<<endl;
+        //cout<<"push " << count<<endl;
     }
     for(int s = result.size()-1; s >= 0; s--){
         *x = result[s];
@@ -676,13 +676,21 @@ class Integer {
     /**
      * <your documentation>
      */
-    friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) {
-        
+    friend std::ostream& operator << (std::ostream& lhs, const Integer& rhs) {       
         if(rhs.is_negative == true)
             lhs << '-';
-        for(unsigned int i = rhs._x.size()-1; i >= 0; i--){
-            lhs << rhs._x[i];
+        // for(unsigned int i = rhs._x.size()-1; i >= 0; i--){
+        //     lhs << rhs._x[i];
+        //     cout<<rhs._x[i]<<endl;
+        // }
+        typename C::const_iterator b = rhs._x.begin();
+        typename C::const_iterator e = rhs._x.end();
+        e--;
+        while(b!=e+1){
+            lhs << *e;
+            e--;
         }
+
         return lhs;}
 
     // ---
@@ -965,6 +973,7 @@ class Integer {
          */
         Integer& operator %= (const Integer& rhs) {
             // <your code>
+            
             return *this;}
 
         // ------------
