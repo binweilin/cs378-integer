@@ -680,7 +680,7 @@ class Integer {
         
         if(rhs.is_negative == true)
             lhs << '-';
-        for(unsigned int i = rhs._x.size()-1; i >= 0; i++){
+        for(unsigned int i = rhs._x.size()-1; i >= 0; i--){
             lhs << rhs._x[i];
         }
         return lhs;}

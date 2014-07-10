@@ -203,37 +203,37 @@ TEST(Integer, negation) {
 // output
 // ------
 
-// TEST(Integer, output) {
-//     try {
-//         const Integer<int> x = 98765;
-//         std::ostringstream out;
-//         out << x;
-//         ASSERT_EQ("98765", out.str());}
-//     catch (std::invalid_argument& e) {
-//         ASSERT_TRUE(false);}}
+TEST(Integer, output) {
+    try {
+        const Integer<int> x = 98765;
+        std::ostringstream out;
+        out << x;
+        ASSERT_EQ("98765", out.str());}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
 
-// // ---
-// // pow
-// // ---
+// ---
+// pow
+// ---
 
-// TEST(Integer, pow_1) {
-//     try {
-//         Integer<int>       x = 98765;
-//         const int          e =  9867;
-//         Integer<int>&      y = x.pow(e);
-//         ASSERT_EQ(9867,  e);
-//         ASSERT_EQ(   0,  x);
-//         ASSERT_EQ(  &x, &y);}
-//     catch (std::invalid_argument& e) {
-//         ASSERT_TRUE(false);}}
+TEST(Integer, pow_1) {
+    try {
+        Integer<int>       x = 98765;
+        const int          e =  9867;
+        Integer<int>&      y = x.pow(e);
+        ASSERT_EQ(9867,  e);
+        ASSERT_EQ(   0,  x);
+        ASSERT_EQ(  &x, &y);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
 
-// TEST(Integer, pow_2) {
-//     try {
-//         const Integer<int> x = 98765;
-//         const int          e =  9867;
-//         const Integer<int> y = pow(x, e);
-//         ASSERT_EQ(98765, x);
-//         ASSERT_EQ( 9867, e);
-//         ASSERT_EQ(    0, y);}
-//     catch (std::invalid_argument& e) {
-//         ASSERT_TRUE(false);}}
+TEST(Integer, pow_2) {
+    try {
+        const Integer<int> x = 98765;
+        const int          e =  9867;
+        const Integer<int> y = pow(x, e);
+        ASSERT_EQ(98765, x);
+        ASSERT_EQ( 9867, e);
+        ASSERT_EQ(    0, y);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
