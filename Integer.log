@@ -1,0 +1,83 @@
+commit ea1d18063451df42c120fb9dd5173d8a51b814b4
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Fri Jul 11 10:05:12 2014 -0500
+
+    almost done
+
+commit b2d542ecc404983688771539d124e60f3eb5e8fa
+Author: binweilin <binweilin@users.noreply.github.com>
+Date:   Thu Jul 10 22:51:52 2014 -0500
+
+    Delete TestInteger.c++
+
+commit 35aaface3c1745b3e3d13451dedb0bec3956a9d9
+Author: binweilin <binweilin@users.noreply.github.com>
+Date:   Thu Jul 10 22:22:10 2014 -0500
+
+    Delete Integer.h
+
+commit 3226400d05bcf051ca45b940326a007c3750e9b9
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Thu Jul 10 16:03:54 2014 -0500
+
+    Fixed multiply
+
+commit 24dedbbe59f36e26e2ba6ce6bee0559083268148
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Thu Jul 10 15:10:09 2014 -0500
+
+    Minus digits fixed
+
+commit ad4b80e73701eb0cfb01cfb729a591e3993f3184
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Thu Jul 10 13:49:38 2014 -0500
+
+    fixed output
+
+commit 7a4713767b25a580e86854908212597ff4665783
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Thu Jul 10 13:34:21 2014 -0500
+
+    fix bug in greater_than
+
+commit 386102db42733ad3ed872e89e8da5fa62753b68f
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Thu Jul 10 13:33:06 2014 -0500
+
+    fix bug in greater_than
+
+commit 0baf9c3a637197da3a3d517a32fd380aa6d063fc
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Thu Jul 10 13:14:17 2014 -0500
+
+    Merged Integer.h files
+
+commit 2809f8e8f7980d0409088529f49e7bae820d2181
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Wed Jul 9 17:44:15 2014 -0500
+
+    most operators done
+
+commit e6fc039940bdf1e46f413b4131f66bc81b7d3e3f
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Wed Jul 9 14:34:49 2014 -0500
+
+    operators and tests
+
+commit 63e9519899c09af21ace20a635712500fc1c163e
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Wed Jul 9 14:29:15 2014 -0500
+
+    multile and divide
+
+commit a8c366e743d60c4c078e5872463ff6c4db18ef57
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Sun Jul 6 19:00:58 2014 -0500
+
+    left, right, plus,minus
+
+commit 6b5cca5dad1a26127e04015a22e69cccb2cce8f7
+Author: binwei lin <binwei92@cs.utexas.edu>
+Date:   Sat Jul 5 15:19:21 2014 -0500
+
+    initial code

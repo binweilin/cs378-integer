@@ -32,12 +32,26 @@ using namespace std;
  */
 template <typename II, typename FI>
 FI shift_left_digits (II b, II e, int n, FI x) {
-    // <your code>
-    x = copy(b, e, x);
-    FI y = x;
-    advance(y, n);
-    fill(x, y, typename iterator_traits<II>::value_type());
-    return y;}
+    //<your code>
+    if(b+1==e && *b == 0){
+        *x = 0;
+        x++;
+        return x;
+    }
+    
+    while(n != 0){
+        *x = 0;
+        x++;
+        n--;
+    }
+    while(b!=e){
+        *x = *b;
+        b++;
+        x++;
+        
+    }
+    return x;}
+
 
 // ------------------
 // shift_right_digits
@@ -55,11 +69,13 @@ FI shift_left_digits (II b, II e, int n, FI x) {
 template <typename II, typename FI>
 FI shift_right_digits (II b, II e, int n, FI x) {
     // <your code>
+    if(n > e-b)
+        throw std::invalid_argument("Integer::Integer()");
+
     while(n){
-        e--;
+        b++;
         n--;
     }
-
     while(b != e){
         *x = *b;
         x++;
@@ -120,8 +136,9 @@ FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
         if(carry == 1){           
             *x = 1;
             carry = 0;
+            x++;
         }
-        x++;
+        
     }
     else if(max == 1){
         while(b1 != e1){ 
@@ -129,8 +146,9 @@ FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
                 *x = *b1 + 1;
                 carry = 0;
             }
-            else
+            else{
                 *x = *b1;
+            }
             x++;
             b1++;
         }
@@ -141,8 +159,9 @@ FI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
                 *x = *b2 + 1;
                 carry = 0;
             }
-            else
+            else{
                 *x = *b2;
+            }
             x++;
             b2++;
         }
@@ -240,7 +259,7 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
     
         while(e2 != b2){
             if(carry >0){
-                *x = *b2 + carry;
+                *x = *b2 - carry;
                 carry = 0;
             }
             else
@@ -276,6 +295,18 @@ FI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
     FI xb = x;
     II2 b2c = b2;
     int count1 = 0;
+
+    if(b1+1 == e1 && *b1 == 0){
+        *x = 0;
+        x++;
+        return x;
+    }
+    if(b2+1 == e2 && *b2 == 0){
+        *x = 0;
+        x++;
+        return x;
+    }
+
     while(e1 > b1){
         
         int count2 = 0;
@@ -393,7 +424,6 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             if(!first &&counter == 2){
                 result.push_back(0);
                 counter = 0;
-                cout<<"push 0"<<endl;
             }            
         }
         first = false;
@@ -440,7 +470,6 @@ FI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             }
         }
         result.push_back(count);
-        cout<<"push " << count<<endl;
     }
     for(int s = result.size()-1; s >= 0; s--){
         *x = result[s];
@@ -465,15 +494,17 @@ class Integer {
      * <your documentation>
      */
     friend bool operator == (const Integer& lhs, const Integer& rhs) {
+        if(lhs._x.size() != rhs._x.size())
+            return false;
+
         if(lhs.is_negative == rhs.is_negative  &&
             lhs._x.size() == rhs._x.size()){
             for(unsigned int i = 0; i < lhs._x.size(); i++){
                 if(!(lhs._x[i] == rhs._x[i]))
                     return false;
             }
-            return true;
         }
-        return false;}
+        return true;}
 
     // -----------
     // operator !=
@@ -495,6 +526,9 @@ class Integer {
     friend bool operator < (const Integer& lhs, const Integer& rhs) {
         Integer l = lhs;
         Integer r = rhs;
+
+        if(lhs == rhs)
+            return false;
         
         if(l.is_negative != r.is_negative){
             if(l.is_negative == true)
@@ -506,10 +540,15 @@ class Integer {
             else if(l._x.size() == r._x.size()){
                 unsigned int s = l._x.size()-1;
                 while(s >= 0){
-                    if(l._x[s] > r._x[s])
-                        return false;
+                    if(l._x[s] != r._x[s]){
+                        if(l._x[s] > r._x[s]){
+                            return false;
+                        }
+                        else if(l._x[s] < r._x[s]){
+                            return true;}
+                    }
+                    s--;
                 }
-                return true;
             }
         }
         else{
@@ -518,10 +557,14 @@ class Integer {
             else if(l._x.size() == r._x.size()){
                 unsigned int s = l._x.size()-1;
                 while(s >= 0){
-                    if(l._x[s] < r._x[s])
-                        return false;
+                    if(l._x[s] != r._x[s]){
+                        if(l._x[s] < r._x[s])
+                            return false;
+                        else if(l._x[s] > r._x[s])
+                            return true;
+                    }
+                    s--;
                 }
-                return true;
             }
         }
         return false;}
@@ -707,7 +750,9 @@ class Integer {
 
         Integer (int value) {
 
-            if(value < 0)
+            if(value == 0)
+                this->is_negative = false;
+            else if(value < 0)
                 this->is_negative = true;
             value = ::abs(value);
             do {
@@ -804,31 +849,34 @@ class Integer {
          */
         Integer& operator += (const Integer& rhs) {
            
-           bool flag;
+            bool flag;
             Integer l = *this;
-            Integer result;
+            Integer s = rhs;
+            C result (l._x.size()+rhs._x.size() + 1, 0);
             typename C::iterator b1 = l._x.begin();
             typename C::iterator e1 = l._x.end();
-            typename C::iterator b2 = rhs._x.begin();
-            typename C::iterator e2 = rhs._x.end();
-            typename C::iterator x = result._x.begin();
-            if(rhs.is_negative == this.is_negative)
+            typename C::iterator b2 = s._x.begin();
+            typename C::iterator e2 = s._x.end();
+            typename C::iterator x = result.begin();
+            typename C::iterator p;
+            if(rhs.is_negative == this->is_negative)
                 flag = true;
             else
                 flag = false;
 
             if(flag == true){
-                plus_digits(b1,e1,b2,e2,x);
-                result.is_negative = rhs.is_negative;
+                p = plus_digits(b1,e1,b2,e2,x);
+                this->is_negative = rhs.is_negative;
             }
             else{
-                minus_digits(b1,e1,b2,e2,x);
+                p = minus_digits(b1,e1,b2,e2,x);
                 if(l > rhs)
-                    result.is_negative = l.is_negative;
+                    this->is_negative = l.is_negative;
                 else
-                    result.is_negative = rhs.is_negative;
+                    this->is_negative = rhs.is_negative;
             }
-            *this = result;
+            C v = C(x,p);
+            this->_x = v;
 
             return *this;}
 
@@ -844,7 +892,7 @@ class Integer {
             bool flag;
             Integer l = *this;
             Integer s = rhs;
-            C result (l._x.size(), 0);
+            C result (l._x.size() + s._x.size()+1, 0);
             typename C::iterator b1 = l._x.begin();
             typename C::iterator e1 = l._x.end();
             typename C::iterator b2 = s._x.begin();
@@ -862,14 +910,16 @@ class Integer {
             }
             else{
                 p = minus_digits(b1,e1,b2,e2,x);
-                if(l > rhs && l.is_negative == false)
+                if(l > rhs && l.is_negative == false){
                     this->is_negative = false;
-                else if(l < rhs && l.is_negative == false)
-                    this->is_negative = true;
-                else if(l < rhs && l.is_negative == true)
-                    this->is_negative = false;
-                else if(l < rhs && l.is_negative == true)
-                    this->is_negative = true;
+                    
+                }
+                else if(l < rhs && l.is_negative == false){
+                    this->is_negative = true;}
+                else if(l < rhs && l.is_negative == true){
+                    this->is_negative = false;}
+                else if(l < rhs && l.is_negative == true){
+                    this->is_negative = true;}
             }
             C v = C(x,p);
             this->_x = v;
@@ -892,7 +942,6 @@ class Integer {
             Integer l = *this;
             Integer s = rhs;
             C result (l._x.size() + s._x.size()+1, 0);
-            //Integer result;
             typename C::iterator b1 = l._x.begin();
             typename C::iterator e1 = l._x.end();
             typename C::iterator b2 = s._x.begin();
@@ -916,21 +965,25 @@ class Integer {
         Integer& operator /= (const Integer& rhs) {
             if(rhs == 0)
                 throw std::invalid_argument("Integer::Integer()");
+
+            Integer s = rhs;
             
-            if(this->is_negative ==  rhs->is_negative)
+            if(this->is_negative == s.is_negative)
                 this->is_negative = false;
             else
                 this->is_negative = true;
 
             Integer l = *this;
-            Integer result;
+            C result (l._x.size() + rhs._x.size()+1, 0);
             typename C::iterator b1 = l._x.begin();
             typename C::iterator e1 = l._x.end();
-            typename C::iterator b2 = rhs._x.begin();
-            typename C::iterator e2 = rhs._x.end();
-            typename C::iterator x = result._x.begin();
+            typename C::iterator b2 = s._x.begin();
+            typename C::iterator e2 = s._x.end();
+            typename C::iterator x = result.begin();
+            typename C::iterator p = divides_digits(b1,e1,b2,e2,x);
+            C v = C(x,p);
+            this->_x = v;
 
-            divide_digits(b1,e1,b2,e1,x);
             return *this;}
 
         // -----------
@@ -946,13 +999,19 @@ class Integer {
             if(rhs <= 0)
                 throw std::invalid_argument("rhs <= 0");
 
-            typename C::iterator b2 = rhs._x.begin();
-            typename C::iterator e2 = rhs._x.end();
+            Integer k = 0;
+            if(*this == 0){               
+                return *this;
+            }
+            Integer s = rhs;
+
+            typename C::iterator b2 = s._x.begin();
+            typename C::iterator e2 = s._x.end();
             Integer result;
-            result = *this / rhs;
-            result = rhs * result;
+            result = *this / s;
+            result = s * result;
             result = *this - result;
-            *this = result;            
+            *this = result;     
             return *this;}
 
         // ------------
@@ -963,10 +1022,15 @@ class Integer {
          * <your documentation>
          */
         Integer& operator <<= (int n) {
-            
-            typename C::iterator b = this._x.begin();
-            typename C::iterator e = this._x.end();
-            shift_left_digits(b, e, n);
+            C result (this->_x.size() + n, 0);
+            Integer t = *this;
+            typename C::iterator b = t._x.begin();
+            typename C::iterator e = t._x.end();
+            typename C::iterator i;
+            typename C::iterator x = result.begin();
+            typename C::iterator p = shift_left_digits(b, e, n, x);
+            C v = C(x,p);
+            this->_x = v;
             return *this;}
 
         // ------------
@@ -977,10 +1041,13 @@ class Integer {
          * <your documentation>
          */
         Integer& operator >>= (int n) {
-            
-            typename C::iterator b = this._x.begin();
-            typename C::iterator e = this._x.end();
-            shift_right_digits(b, e, n);
+            C result (this->_x.size() + n, 0);
+            typename C::iterator b = this->_x.begin();
+            typename C::iterator e = this->_x.end();
+            typename C::iterator x = result.begin();
+            typename C::iterator p = shift_right_digits(b, e, n, x);
+            C v = C(x,p);
+            this->_x = v;
             return *this;}
 
         // ---

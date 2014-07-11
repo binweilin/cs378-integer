@@ -57,7 +57,7 @@ To obtain coverage of the test:
 
 TEST(Integer, shift_left_digits_1) {
     const int a[] = {2, 3, 4};
-    const int b[] = {2, 3, 4, 0, 0};
+    const int b[] = {0, 2, 3, 4};
           int x[10];
     const int* p = shift_left_digits(a, a + 3, 1, x);
     ASSERT_EQ(4, p - x);
@@ -65,7 +65,7 @@ TEST(Integer, shift_left_digits_1) {
 
 TEST(Integer, shift_left_digits_2) {
     const int a[] = {2, 3, 4};
-    const int b[] = {2, 3, 4, 0, 0};
+    const int b[] = {0, 0, 0, 2, 3, 4};
           int x[10];
     const int* p = shift_left_digits(a, a + 3, 3, x);
     ASSERT_EQ(6, p - x);
@@ -73,7 +73,7 @@ TEST(Integer, shift_left_digits_2) {
 
 TEST(Integer, shift_left_digits_3) {
     const int a[] = {2, 3, 4};
-    const int b[] = {2, 3, 4, 0, 0};
+    const int b[] = {0, 0, 2, 3, 4};
           int x[10];
     const int* p = shift_left_digits(a, a + 3, 2, x);
     ASSERT_EQ(5, p - x);
@@ -85,7 +85,7 @@ TEST(Integer, shift_left_digits_3) {
 
 TEST(Integer, shift_right_digits_1) {
     const int a[] = {2, 3, 4};
-    const int b[] = {2};
+    const int b[] = {4};
           int x[10];
     const int* p = shift_right_digits(a, a + 3, 2, x);
     ASSERT_EQ(1, p - x);
@@ -93,7 +93,7 @@ TEST(Integer, shift_right_digits_1) {
 
 TEST(Integer, shift_right_digits_2) {
     const int a[] = {2, 3, 4};
-    const int b[] = {2, 3};
+    const int b[] = {3, 4};
           int x[10];
     const int* p = shift_right_digits(a, a + 3, 1, x);
     ASSERT_EQ(2, p - x);
@@ -101,7 +101,7 @@ TEST(Integer, shift_right_digits_2) {
 
 TEST(Integer, shift_right_digits_3) {
     const int a[] = {2, 3, 4, 5, 6};
-    const int b[] = {2, 3};
+    const int b[] = {5, 6};
           int x[10];
     const int* p = shift_right_digits(a, a + 5, 3, x);
     ASSERT_EQ(2, p - x);
@@ -112,12 +112,12 @@ TEST(Integer, shift_right_digits_3) {
 // -----------
 
 TEST(Integer, plus_digits_1) {
-    const int a[] = {2, 3, 4};
-    const int b[] = {5, 6, 7};
-    const int c[] = {7, 9, 1, 1};
+    const int a[] = {0, 0, 1};
+    const int b[] = {9, 9, 1};
+    const int c[] = {9, 9, 2};
           int x[10];
     const int* p = plus_digits(a, a + 3, b, b + 3, x);
-    ASSERT_EQ(4, p - x);
+    ASSERT_EQ(3, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
 TEST(Integer, plus_digits_2) {
@@ -144,12 +144,12 @@ TEST(Integer, plus_digits_3) {
 // ------------
 
 TEST(Integer, minus_digits) {
-    const int a[] = {7, 6, 5};
-    const int b[] = {1, 0, 8};
-    const int c[] = {4, 3, 2};
+    const int a[] = {5, 4, 3, 2, 1};
+    const int b[] = {0, 4, 3, 2, 1};
+    const int c[] = {5};
           int x[10];
-    const int* p = minus_digits(b, b + 3, a, a + 3, x);
-    ASSERT_EQ(3, p - x);
+    const int* p = minus_digits(b, b + 5, a, a + 5, x);
+    ASSERT_EQ(1, p - x);
     ASSERT_TRUE(std::equal(const_cast<const int*>(x), p, c));}
 
 TEST(Integer, minus_digitsII) {
@@ -417,3 +417,262 @@ TEST(Integer, pow_3) {
         ASSERT_EQ(1000, y);}
     catch (std::invalid_argument& e) {
         ASSERT_TRUE(false);}}
+
+
+// ----------
+// operator <
+// ----------
+
+TEST(Integer, less_than_1) {
+    try {
+        const Integer<int> x = 0;
+        const Integer<int> y = 0;
+        ASSERT_EQ(      x<y, false);} 
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, less_than_2) {
+    try {
+        const Integer<int> x = 201;
+        const Integer<int> y = 102;
+        ASSERT_EQ(      x<y, false);} 
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, less_than_3) {
+    try {
+        const Integer<int> x = -1;
+        const Integer<int> y = -2;
+        ASSERT_EQ(      x<y, false);} 
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+// -----------
+// operator +=
+// -----------
+
+TEST(Integer, plus_equals_1) {
+        Integer<int> x("199"); 
+        const Integer<int> y("100"); 
+        x += y;
+        Integer<int> sum("299");
+        ASSERT_EQ(      x, sum);}
+
+TEST(Integer, plus_equals_2) {
+        Integer<int> x("-987654321987654321"); 
+        const Integer<int> y("-987654321987654321"); 
+        x += y;
+        Integer<int> sum("-1975308643975308642");
+        ASSERT_EQ(      x, sum);}
+
+TEST(Integer, plus_equals_3) {
+        Integer<int> x("987654321987654321"); 
+        const Integer<int> y("-1975308643975308642"); 
+        x += y;
+        Integer<int> sum("-987654321987654321");
+        ASSERT_EQ(      x, sum);}
+
+// -----------
+// operator -=
+// -----------
+TEST(Integer, minus_equals_1) {
+        Integer<int> x("-987654321987654321"); 
+        const Integer<int> y("0"); 
+        x -= y;
+        Integer<int> difference("-987654321987654321");
+        ASSERT_EQ(      x, difference);}
+
+TEST(Integer, minus_equals_2) {
+        Integer<int> x("987654321987654321"); 
+        const Integer<int> y("76543217654321"); 
+        x -= y;
+        Integer<int> difference("987577778770000000");
+        ASSERT_EQ(      x, difference);}
+
+TEST(Integer, minus_equals_3) {
+        Integer<int> x("-987654321987654321"); 
+        const Integer<int> y("-76543217654321"); 
+        x -= y;
+        Integer<int> difference("-987577778770000000");
+        ASSERT_EQ(      x, difference);}
+
+TEST(Integer, minus_equals_4) {
+        Integer<int> x(12345); 
+        const Integer<int> y(12340); 
+        x -= y;
+        Integer<int> difference(5);
+        ASSERT_EQ(      x, difference);}
+
+// -----------
+// operator *=
+// -----------
+
+//first positive second positive
+TEST(Integer, times_equals_1) {
+        Integer<int> x("987654321987654321"); 
+        const Integer<int> y("76543217654321"); 
+        x *= y;
+        Integer<int> product("75598239735131859630574619971041");
+        ASSERT_EQ(      x, product);}
+
+//first positive second zero
+TEST(Integer, times_equals_2) {
+        Integer<int> x("987654321987654321"); 
+        const Integer<int> y("0"); 
+        x *= y;
+        Integer<int> product("0");
+        ASSERT_EQ(      x, product);}
+
+
+
+//first positive second negative
+TEST(Integer, times_equals_3) {
+        Integer<int> x("2342341235"); 
+        const Integer<int> y("-42157978692456234"); 
+        x *= y;
+        Integer<int> product("-98748371875591620331008990");
+        ASSERT_EQ(      x, product);}
+
+// -----------
+// operator /=
+// -----------
+
+TEST(Integer, divide_equals_1) {
+    try {
+        Integer<int> x = -12345;
+        x /= -20;
+        ASSERT_EQ(617, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, divide_equals_2) {
+    try {
+        Integer<int> x = 0;
+        x /= 3;
+        ASSERT_EQ(0, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, divide_equals_3) {
+    try {
+        Integer<int> x = 12345;
+        x /= 20;
+        ASSERT_EQ(617, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+// -----------
+// operator %=
+// -----------
+
+// modulo of negative and negative
+TEST(Integer, modulo_equals_1) {
+    try {
+        Integer<int> x = -12345;
+        const Integer<int> y = -20;
+        x %= y;
+        ASSERT_TRUE(false);}
+    catch (std::invalid_argument& e) {
+        }}
+
+// modulo of 0 is 0
+TEST(Integer, modulo_equals_2) {
+    try {
+        Integer<int> x = 0;
+        const Integer<int> y = 3;
+        x %= y;
+        ASSERT_EQ(0, x);}
+    catch (std::invalid_argument& e) {
+        cout <<"here3\n";
+        ASSERT_TRUE(false);}}
+
+// modulo of positive and positive
+TEST(Integer, modulo_equals_3) {
+    try {
+        Integer<int> x = 12345;
+        x %= 20;
+        ASSERT_EQ(5, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+// ------------
+// operator <<=
+// ------------
+
+TEST(Integer, shift_left_equals_1) {
+    try {
+        Integer<int> x = 12345;
+        x <<= 2;
+        ASSERT_EQ(1234500, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, shift_left_equals_2) {
+    try {
+        Integer<int> x = 0;
+        x <<= 3;
+        ASSERT_EQ(0, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, shift_left_equals_3) {
+    try {
+        Integer<int> x = 12345;
+        x <<= 7;
+        ASSERT_EQ(Integer<int>("123450000000"), x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+
+// ------------
+// operator >>=
+// ------------
+
+TEST(Integer, shift_right_equals_1) {
+    try {
+        Integer<int> x = 12345;
+        x >>= 2;
+        ASSERT_EQ(123, x);}
+    catch (std::invalid_argument& e) {
+        ASSERT_TRUE(false);}}
+
+TEST(Integer, shift_right_equals_2) {
+    try {
+        Integer<int> x = 0;
+        x >>= 3;
+        ASSERT_TRUE(false);}
+    catch (std::invalid_argument& e) {
+        }}
+
+TEST(Integer, shift_right_equals_3) {
+    try {
+        Integer<int> x = 12345;
+        x >>= 7;
+        ASSERT_TRUE(false);}
+    catch (std::invalid_argument& e) {
+        }}
+
+//------------
+//greater_than
+//------------
+
+TEST(Integer, greater_than_1) {
+    std::vector<int> v1{1, 2, 3};
+    std::vector<int> v2{1, 2, 3};
+    int x = greater_than(v1, v2);
+    ASSERT_EQ(0, x);    
+}
+
+TEST(Integer, greater_than_2) {
+    std::vector<int> v1{1, 2, 3};
+    std::vector<int> v2{1, 2, 2};
+    int x = greater_than(v1, v2);
+    ASSERT_EQ(1, x);    
+}
+
+TEST(Integer, greater_than_3) {
+    std::vector<int> v1{1, 2, 3};
+    std::vector<int> v2{1, 2, 4};
+    int x = greater_than(v1, v2);
+    ASSERT_EQ(-1, x);    
+}

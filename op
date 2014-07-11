@@ -1,0 +1,289 @@
+File 'TestInteger.c++'
+Lines executed:85.12% of 410
+Branches executed:43.71% of 3258
+Taken at least once:21.85% of 3258
+Calls executed:40.24% of 3002
+Creating 'TestInteger.c++.gcov'
+
+File '/usr/include/c++/4.7/bits/basic_ios.h'
+Lines executed:0.00% of 4
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+Calls executed:0.00% of 1
+Creating 'basic_ios.h.gcov'
+
+File '/usr/include/c++/4.7/ostream'
+No executable lines
+No branches
+No calls
+Removing 'ostream.gcov'
+
+File '/usr/include/gtest/internal/gtest-port.h'
+Lines executed:29.41% of 17
+Branches executed:7.14% of 28
+Taken at least once:3.57% of 28
+Calls executed:3.85% of 26
+Creating 'gtest-port.h.gcov'
+
+File '/usr/include/gtest/internal/gtest-param-util.h'
+Lines executed:0.00% of 29
+Branches executed:0.00% of 34
+Taken at least once:0.00% of 34
+Calls executed:0.00% of 60
+Creating 'gtest-param-util.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_bvector.h'
+Lines executed:0.00% of 32
+Branches executed:0.00% of 10
+Taken at least once:0.00% of 10
+Calls executed:0.00% of 14
+Creating 'stl_bvector.h.gcov'
+
+File '/usr/include/gtest/internal/gtest-internal.h'
+Lines executed:50.00% of 6
+Branches executed:49.61% of 258
+Taken at least once:24.81% of 258
+Calls executed:33.10% of 580
+Creating 'gtest-internal.h.gcov'
+
+File '/usr/include/c++/4.7/iostream'
+Lines executed:100.00% of 1
+No branches
+Calls executed:100.00% of 2
+Creating 'iostream.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_algobase.h'
+Lines executed:100.00% of 52
+Branches executed:100.00% of 10
+Taken at least once:90.00% of 10
+Calls executed:100.00% of 79
+Creating 'stl_algobase.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_iterator.h'
+Lines executed:100.00% of 35
+No branches
+Calls executed:94.74% of 19
+Creating 'stl_iterator.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_iterator_base_types.h'
+Lines executed:85.71% of 7
+No branches
+Calls executed:100.00% of 3
+Creating 'stl_iterator_base_types.h.gcov'
+
+File '/usr/include/gtest/gtest-printers.h'
+Lines executed:0.00% of 35
+Branches executed:0.00% of 62
+Taken at least once:0.00% of 62
+Calls executed:0.00% of 84
+Creating 'gtest-printers.h.gcov'
+
+File '/usr/include/c++/4.7/ext/new_allocator.h'
+Lines executed:92.86% of 14
+Branches executed:100.00% of 6
+Taken at least once:50.00% of 6
+Calls executed:77.78% of 9
+Creating 'new_allocator.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_uninitialized.h'
+Lines executed:100.00% of 15
+No branches
+Calls executed:100.00% of 21
+Creating 'stl_uninitialized.h.gcov'
+
+File '/usr/include/c++/4.7/bits/alloc_traits.h'
+Lines executed:61.54% of 26
+No branches
+Calls executed:87.50% of 16
+Creating 'alloc_traits.h.gcov'
+
+File '/usr/include/c++/4.7/bits/allocator.h'
+Lines executed:50.00% of 8
+No branches
+Calls executed:75.00% of 4
+Creating 'allocator.h.gcov'
+
+File '/usr/include/c++/4.7/bits/basic_string.h'
+Lines executed:28.57% of 7
+Branches executed:0.00% of 4
+Taken at least once:0.00% of 4
+Calls executed:16.67% of 6
+Creating 'basic_string.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_iterator_base_funcs.h'
+Lines executed:100.00% of 4
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+Calls executed:62.50% of 8
+Creating 'stl_iterator_base_funcs.h.gcov'
+
+File '/usr/include/c++/4.7/bits/move.h'
+Lines executed:100.00% of 9
+No branches
+Calls executed:100.00% of 6
+Creating 'move.h.gcov'
+
+File '/usr/include/c++/4.7/ext/type_traits.h'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'type_traits.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_construct.h'
+Lines executed:100.00% of 7
+No branches
+Calls executed:100.00% of 4
+Creating 'stl_construct.h.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_vector.h'
+Lines executed:96.32% of 136
+Branches executed:94.12% of 34
+Taken at least once:55.88% of 34
+Calls executed:77.48% of 111
+Creating 'stl_vector.h.gcov'
+
+File '/usr/include/c++/4.7/sstream'
+Lines executed:0.00% of 1
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+Calls executed:0.00% of 5
+Creating 'sstream.gcov'
+
+File '/usr/include/c++/4.7/bits/basic_string.tcc'
+Lines executed:0.00% of 16
+Branches executed:0.00% of 16
+Taken at least once:0.00% of 16
+Calls executed:0.00% of 20
+Creating 'basic_string.tcc.gcov'
+
+File '/usr/include/c++/4.7/bits/vector.tcc'
+Lines executed:75.90% of 83
+Branches executed:48.94% of 94
+Taken at least once:29.79% of 94
+Calls executed:50.34% of 145
+Creating 'vector.tcc.gcov'
+
+File '/usr/include/gtest/gtest.h'
+Lines executed:50.00% of 24
+Branches executed:26.19% of 84
+Taken at least once:13.10% of 84
+Calls executed:18.56% of 167
+Creating 'gtest.h.gcov'
+
+File '/usr/include/c++/4.7/streambuf'
+No executable lines
+No branches
+No calls
+Removing 'streambuf.gcov'
+
+File '/usr/include/c++/4.7/bits/stl_algo.h'
+Lines executed:100.00% of 11
+Branches executed:100.00% of 6
+Taken at least once:66.67% of 6
+Calls executed:88.89% of 9
+Creating 'stl_algo.h.gcov'
+
+File '/usr/include/c++/4.7/istream'
+No executable lines
+No branches
+No calls
+Removing 'istream.gcov'
+
+File 'Integer.h'
+Lines executed:93.88% of 490
+Branches executed:90.19% of 938
+Taken at least once:61.41% of 938
+Calls executed:75.10% of 767
+Creating 'Integer.h.gcov'
+
+File '/usr/include/c++/4.7/ext/alloc_traits.h'
+Lines executed:75.00% of 8
+No branches
+Calls executed:100.00% of 1
+Creating 'alloc_traits.h.gcov'
+
+File '/usr/include/c++/4.7/initializer_list'
+Lines executed:100.00% of 3
+No branches
+Calls executed:100.00% of 2
+Creating 'initializer_list.gcov'
+
+File '/usr/include/c++/4.7/iomanip'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'iomanip.gcov'
+
+File '/usr/include/gtest/gtest-message.h'
+Lines executed:0.00% of 4
+Branches executed:0.00% of 4
+Taken at least once:0.00% of 4
+Calls executed:0.00% of 12
+Creating 'gtest-message.h.gcov'
+
+File '/usr/include/gtest/gtest-test-part.h'
+Lines executed:0.00% of 1
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+Calls executed:0.00% of 3
+Creating 'gtest-test-part.h.gcov'
+
+File '/usr/include/gtest/internal/gtest-death-test-internal.h'
+Lines executed:0.00% of 2
+Branches executed:0.00% of 4
+Taken at least once:0.00% of 4
+Calls executed:0.00% of 6
+Creating 'gtest-death-test-internal.h.gcov'
+
+File '/usr/include/gtest/internal/gtest-string.h'
+Lines executed:8.33% of 12
+Branches executed:100.00% of 2
+Taken at least once:100.00% of 2
+Calls executed:20.00% of 5
+Creating 'gtest-string.h.gcov'
+
+File '/usr/include/c++/4.7/bits/locale_facets.h'
+Lines executed:0.00% of 5
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+Calls executed:0.00% of 2
+Creating 'locale_facets.h.gcov'
+
+File '/usr/include/c++/4.7/bits/ios_base.h'
+Lines executed:0.00% of 8
+No branches
+No calls
+Creating 'ios_base.h.gcov'
+
+File '/usr/include/c++/4.7/typeinfo'
+Lines executed:0.00% of 3
+Branches executed:0.00% of 6
+Taken at least once:0.00% of 6
+No calls
+Creating 'typeinfo.gcov'
+
+File '/usr/include/c++/4.7/ext/atomicity.h'
+Lines executed:0.00% of 10
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+Calls executed:0.00% of 3
+Creating 'atomicity.h.gcov'
+
+File '/usr/include/x86_64-linux-gnu/c++/4.7/bits/gthr-default.h'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'gthr-default.h.gcov'
+
+File '/usr/include/c++/4.7/bits/char_traits.h'
+Lines executed:0.00% of 6
+No branches
+No calls
+Creating 'char_traits.h.gcov'
+
+File '/usr/include/c++/4.7/new'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'new.gcov'
+
