@@ -1,0 +1,86 @@
+Running main() from gtest_main.cc
+[==========] Running 36 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 36 tests from Integer
+[ RUN      ] Integer.shift_left_digits_1
+[       OK ] Integer.shift_left_digits_1 (0 ms)
+[ RUN      ] Integer.shift_left_digits_2
+[       OK ] Integer.shift_left_digits_2 (0 ms)
+[ RUN      ] Integer.shift_left_digits_3
+[       OK ] Integer.shift_left_digits_3 (0 ms)
+[ RUN      ] Integer.shift_right_digits_1
+[       OK ] Integer.shift_right_digits_1 (0 ms)
+[ RUN      ] Integer.shift_right_digits_2
+[       OK ] Integer.shift_right_digits_2 (0 ms)
+[ RUN      ] Integer.shift_right_digits_3
+[       OK ] Integer.shift_right_digits_3 (0 ms)
+[ RUN      ] Integer.plus_digits_1
+[       OK ] Integer.plus_digits_1 (0 ms)
+[ RUN      ] Integer.plus_digits_2
+[       OK ] Integer.plus_digits_2 (0 ms)
+[ RUN      ] Integer.plus_digits_3
+[       OK ] Integer.plus_digits_3 (0 ms)
+[ RUN      ] Integer.minus_digits
+[       OK ] Integer.minus_digits (0 ms)
+[ RUN      ] Integer.minus_digitsII
+[       OK ] Integer.minus_digitsII (1 ms)
+[ RUN      ] Integer.minus_digitsIII
+[       OK ] Integer.minus_digitsIII (0 ms)
+[ RUN      ] Integer.multiplies_digits_1
+[       OK ] Integer.multiplies_digits_1 (0 ms)
+[ RUN      ] Integer.multiplies_digits_2
+[       OK ] Integer.multiplies_digits_2 (0 ms)
+[ RUN      ] Integer.multiplies_digits_3
+[       OK ] Integer.multiplies_digits_3 (0 ms)
+[ RUN      ] Integer.divides_digits_1
+push 4
+push 3
+push 2
+[       OK ] Integer.divides_digits_1 (0 ms)
+[ RUN      ] Integer.divides_digits_2
+[       OK ] Integer.divides_digits_2 (0 ms)
+[ RUN      ] Integer.divides_digits_3
+push 0
+push 0
+[       OK ] Integer.divides_digits_3 (0 ms)
+[ RUN      ] Integer.constructor_1
+[       OK ] Integer.constructor_1 (0 ms)
+[ RUN      ] Integer.constructor_2
+[       OK ] Integer.constructor_2 (0 ms)
+[ RUN      ] Integer.constructor_3
+[       OK ] Integer.constructor_3 (0 ms)
+[ RUN      ] Integer.abs_1
+[       OK ] Integer.abs_1 (0 ms)
+[ RUN      ] Integer.abs_2
+[       OK ] Integer.abs_2 (0 ms)
+[ RUN      ] Integer.abs_3
+[       OK ] Integer.abs_3 (0 ms)
+[ RUN      ] Integer.equal_to_1
+[       OK ] Integer.equal_to_1 (0 ms)
+[ RUN      ] Integer.equal_to_2
+[       OK ] Integer.equal_to_2 (0 ms)
+[ RUN      ] Integer.equal_to_3
+[       OK ] Integer.equal_to_3 (0 ms)
+[ RUN      ] Integer.negation_1
+[       OK ] Integer.negation_1 (0 ms)
+[ RUN      ] Integer.negation_2
+[       OK ] Integer.negation_2 (0 ms)
+[ RUN      ] Integer.negation_3
+[       OK ] Integer.negation_3 (0 ms)
+[ RUN      ] Integer.output_1
+[       OK ] Integer.output_1 (0 ms)
+[ RUN      ] Integer.output_2
+[       OK ] Integer.output_2 (0 ms)
+[ RUN      ] Integer.output_3
+[       OK ] Integer.output_3 (0 ms)
+[ RUN      ] Integer.pow_1
+[       OK ] Integer.pow_1 (0 ms)
+[ RUN      ] Integer.pow_2
+[       OK ] Integer.pow_2 (0 ms)
+[ RUN      ] Integer.pow_3
+[       OK ] Integer.pow_3 (0 ms)
+[----------] 36 tests from Integer (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 36 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 36 tests.
