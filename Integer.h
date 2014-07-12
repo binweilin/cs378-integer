@@ -233,6 +233,10 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             if(carry >0){
                 *x = *b1 - carry;
                 carry = 0;
+                if(*x < 0){
+                    *x += 10;
+                    carry = 1;
+                }
             }
             else
                 *x = *b1;
@@ -261,6 +265,10 @@ FI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, FI x) {
             if(carry >0){
                 *x = *b2 - carry;
                 carry = 0;
+                if(*x < 0){
+                    *x += 10;
+                    carry = 1;
+                }
             }
             else
                 *x = *b2;
